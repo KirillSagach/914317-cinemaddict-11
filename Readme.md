@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
 * Студент: [Кирилл Сагач](https://up.htmlacademy.ru/ecmascript/11/user/914317).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Мирошниченко](https://htmlacademy.ru/profile/id591417).
 
 ---
 

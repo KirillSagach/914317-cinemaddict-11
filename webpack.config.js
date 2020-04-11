@@ -5,11 +5,11 @@ module.exports = {
   entry: `./src/main.js`,
   output: {
     filename: `bundle.js`,
-    path: path.join(`C:/Users/raced/OneDrive/Документы/GitHub/914317-cinemaddict-11/`, `public`)
+    path: path.join(__dirname, `public`)
   },
   devtool: `source-map`,
   devServer: {
-    contentBase: path.join(`C:/Users/raced/OneDrive/Документы/GitHub/914317-cinemaddict-11/`, `public`),
+    contentBase: path.join(__dirname, `public`),
     watchContentBase: true
   }
 };

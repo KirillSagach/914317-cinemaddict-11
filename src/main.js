@@ -1,97 +1,17 @@
-'use strict';
-
 const FILMS_LIST_COUNT = 5;
 
-const createHeaderProfile = () => {
-  return (`
-    <section class="header__profile profile">
-    <p class="profile__rating">Movie Buff</p>
-    <img class="profile__avatar" src="images/bitmap@2x.png" alt="Avatar" width="35" height="35">
-  </section>
-`);
-};
-
-const createMainNavigation = () => {
-  return (`
-   <nav class="main-navigation">
-    <div class="main-navigation__items">
-      <a href="#all" class="main-navigation__item main-navigation__item--active">All movies</a>
-      <a href="#watchlist" class="main-navigation__item">Watchlist <span class="main-navigation__item-count">13</span></a>
-      <a href="#history" class="main-navigation__item">History <span class="main-navigation__item-count">4</span></a>
-      <a href="#favorites" class="main-navigation__item">Favorites <span class="main-navigation__item-count">8</span></a>
-    </div>
-    <a href="#stats" class="main-navigation__additional">Stats</a>
-  </nav>
-  `);
-};
-
-const createSort = () => {
-  return (`
-    <ul class="sort">
-      <li><a href="#" class="sort__button sort__button--active">Sort by default</a></li>
-      <li><a href="#" class="sort__button">Sort by date</a></li>
-      <li><a href="#" class="sort__button">Sort by rating</a></li>
-    </ul>
-    `);
-};
-
-const createSectionFilms = () => {
-  return (`
-   <section class="films">
-    <section class="films-list">
-
-    </section>
-  </section>
-  `);
-};
-
-const createHeader = () => {
-  return (`<h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>`);
-};
-const createHeaderTopRated = () => {
-  return (`<h2 class="films-list__title">Top rated</h2>`);
-};
-const createHeaderMostCommented = () => {
-  return (`<h2 class="films-list__title">Most commented</h2>`);
-};
-
-const createFilmsListContainer = () => {
-  return (`
-      <div class="films-list__container">
-
-      </div>
-`);
-};
-
-const createFilmsListExtraSection = () => {
-  return (`
-      <section class="films-list--extra">
-
-      </section>
-`);
-};
-
-const createFilmCard = (Title, Rating, Year, Duration, Genre, Src, Description, Comments, ActiveWatchlist, ActiveWatched, ActiveFavourite) => {
-  return (`
-        <article class="film-card">
-          <h3 class="film-card__title">${Title}</h3>
-          <p class="film-card__rating">${Rating}</p>
-          <p class="film-card__info">
-            <span class="film-card__year">${Year}</span>
-            <span class="film-card__duration">${Duration}</span>
-            <span class="film-card__genre">${Genre}</span>
-          </p>
-          <img src=${Src} alt="" class="film-card__poster">
-          <p class="film-card__description">${Description}</p>
-          <a class="film-card__comments">${Comments}</a>
-          <form class="film-card__controls">
-            <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${ActiveWatchlist}">Add to watchlist</button>
-            <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${ActiveWatched}">Mark as watched</button>
-            <button class="film-card__controls-item button film-card__controls-item--favorite ${ActiveFavourite}">Mark as favorite</button>
-          </form>
-        </article>
-  `);
-};
+import {createHeaderProfile} from '../src/components/createHeaderProfile.js';
+import {createMainNavigation} from '../src/components/createMainNavigation.js';
+import {createSort} from '../src/components/createSort.js';
+import {createSectionFilms} from '../src/components/createSectionFilms.js';
+import {createHeader} from '../src/components/createHeader.js';
+import {createHeaderTopRated} from '../src/components/createHeaderTopRated.js';
+import {createHeaderMostCommented} from '../src/components/createHeaderMostCommented.js';
+import {createFilmsListContainer} from '../src/components/createFilmsListContainer.js';
+import {createFilmsListExtraSection} from '../src/components/createFilmsListExtraSection.js';
+import {createFilmCard} from '../src/components/createFilmCard.js';
+import {createBtnLoadMore} from '../src/components/createBtnLoadMore.js';
+import {createFooterStatistics} from '../src/components/createFooterStatistics.js';
 
 const filmsArray = [
   {Title: `The Dance of Life`, Rating: `8.3`, Year: `1929`, Duration: `1h 55m`, Genre: `Musical`, SrcPic: `"./images/posters/the-dance-of-life.jpg"`, Description: `Burlesque comic Ralph "Skid" Johnson (Skelly), and specialty dancer Bonny Lee King (Carroll), end up together on a cold, rainy night at a tr…`, Comments: `5 comments`, ActiveWatchlist: ``, ActiveWatched: ``, ActiveFavourite: ``},
@@ -100,18 +20,6 @@ const filmsArray = [
   {Title: `Santa Claus Conquers the Martians`, Rating: `2.3`, Year: `1964`, Duration: `1h 21m`, Genre: `Comedy`, SrcPic: `"./images/posters/santa-claus-conquers-the-martians.jpg"`, Description: `The Martians Momar ("Mom Martian") and Kimar ("King Martian") are worried that their children Girmar ("Girl Martian") and Bomar ("Boy Marti…`, Comments: `465 comments`, ActiveWatchlist: ``, ActiveWatched: ``, ActiveFavourite: `film-card__controls-item--active`},
   {Title: `Popeye the Sailor Meets Sindbad the Sailor`, Rating: `6.3`, Year: `1936`, Duration: `16m`, Genre: `Cartoon`, SrcPic: `"./images/posters/popeye-meets-sinbad.png"`, Description: `In this short, Sindbad the Sailor (presumably Bluto playing a "role") proclaims himself, in song, to be the greatest sailor, adventurer and…`, Comments: `0 comments`, ActiveWatchlist: `film-card__controls-item--active`, ActiveWatched: `film-card__controls-item--active`, ActiveFavourite: `film-card__controls-item--active`},
 ];
-
-const createBtnLoadMore = () => {
-  return (`
-    <button class="films-list__show-more">Show more</button>
-  `);
-};
-
-const createFooterStatistics = () => {
-  return (`
-  <p>130 291 movies inside</p>
-  `);
-};
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);

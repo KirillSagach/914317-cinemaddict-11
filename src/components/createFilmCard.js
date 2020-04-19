@@ -1,23 +1,31 @@
-const createFilmCard = (Title, Rating, Year, Duration, Genre, Src, Description, Comments, ActiveWatchlist, ActiveWatched, ActiveFavourite) => {
+const createFilmMarkup = ({title, rating, year, duration, genre, srcPic, description, comments, activeWatchlist, activeWatched, activeFavourite}) => {
+  let itemActive = `film-card__controls-item--active`;
+  let activeWatchlistMarkup = activeWatchlist ? itemActive : ``;
+  let activeWatchedMarkup = activeWatched ? itemActive : ``;
+  let activeFavouriteMarkup = activeFavourite ? itemActive : ``;
+
   return (`
-        <article class="film-card">
-          <h3 class="film-card__title">${Title}</h3>
-          <p class="film-card__rating">${Rating}</p>
+    <article class="film-card">
+    <h3 class="film-card__title">${title}</h3>
+          <p class="film-card__rating">${rating}</p>
           <p class="film-card__info">
-            <span class="film-card__year">${Year}</span>
-            <span class="film-card__duration">${Duration}</span>
-            <span class="film-card__genre">${Genre}</span>
+            <span class="film-card__year">${year}</span>
+            <span class="film-card__duration">${duration}</span>
+            <span class="film-card__genre">${genre}</span>
           </p>
-          <img src=${Src} alt="" class="film-card__poster">
-          <p class="film-card__description">${Description}</p>
-          <a class="film-card__comments">${Comments}</a>
+          <img src="${srcPic}" alt="" class="film-card__poster">
+          <p class="film-card__description">${description}</p>
+          <a class="film-card__comments">${comments} comments</a>
           <form class="film-card__controls">
-            <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${ActiveWatchlist}">Add to watchlist</button>
-            <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${ActiveWatched}">Mark as watched</button>
-            <button class="film-card__controls-item button film-card__controls-item--favorite ${ActiveFavourite}">Mark as favorite</button>
+            <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${activeWatchlistMarkup}">Add to watchlist</button>
+            <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${activeWatchedMarkup}">Mark as watched</button>
+            <button class="film-card__controls-item button film-card__controls-item--favorite ${activeFavouriteMarkup}">Mark as favorite</button>
           </form>
-        </article>
-  `);
+     </article>`);
+};
+
+const createFilmCard = (itemStart, itemEnd, filmsMarkup) => {
+  return filmsMarkup.slice(itemStart, itemEnd).map((it)=>createFilmMarkup(it)).join(`\n`);
 };
 
 export {createFilmCard};

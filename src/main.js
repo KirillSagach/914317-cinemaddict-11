@@ -8,14 +8,19 @@ import {createSectionFilms} from '../src/components/createSectionFilms.js';
 import {createFilmsListContainer} from '../src/components/createFilmsListContainer.js';
 import {createFilmsListExtraSection} from '../src/components/createFilmsListExtraSection.js';
 import {createfilmsMockArray} from '../src/mocks/filmCard.js';
-import {createFilmCard} from '../src/components/createFilmCard.js';
+import {createFilmMarkup} from '../src/components/createFilmCard.js';
 import {createBtnLoadMore} from '../src/components/createBtnLoadMore.js';
 import {createHeaderTopRated} from '../src/components/createHeaderTopRated.js';
 import {createHeaderMostCommented} from '../src/components/createHeaderMostCommented.js';
 import {createFooterStatistics} from '../src/components/createFooterStatistics.js';
 
+
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
+};
+
+const createFilmCard = (itemStart, itemEnd, filmsMarkup) => {
+  return filmsMarkup.slice(itemStart, itemEnd).map((it) => createFilmMarkup(it)).join(`\n`);
 };
 
 const siteHeaderElement = document.querySelector(`.header`);

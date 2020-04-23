@@ -1,8 +1,8 @@
 const createFilmMarkup = ({title, rating, year, duration, genre, srcPic, description, comments, activeWatchlist, activeWatched, activeFavourite}) => {
-  let itemActive = `film-card__controls-item--active`;
-  let activeWatchlistMarkup = activeWatchlist ? itemActive : ``;
-  let activeWatchedMarkup = activeWatched ? itemActive : ``;
-  let activeFavouriteMarkup = activeFavourite ? itemActive : ``;
+  const itemActive = `film-card__controls-item--active`;
+  const activeWatchlistMarkup = activeWatchlist ? itemActive : ``;
+  const activeWatchedMarkup = activeWatched ? itemActive : ``;
+  const activeFavouriteMarkup = activeFavourite ? itemActive : ``;
 
   return (`
     <article class="film-card">
@@ -24,8 +24,4 @@ const createFilmMarkup = ({title, rating, year, duration, genre, srcPic, descrip
      </article>`);
 };
 
-const createFilmCard = (itemStart, itemEnd, filmsMarkup) => {
-  return filmsMarkup.slice(itemStart, itemEnd).map((it)=>createFilmMarkup(it)).join(`\n`);
-};
-
-export {createFilmCard};
+export {createFilmMarkup};

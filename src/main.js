@@ -1,18 +1,19 @@
 let FILM_COUNT = 5;
 let PREV_FILM_COUNT = 0;
 
-import {createHeaderProfile} from '../src/components/createHeaderProfile.js';
-import {createMainNavigation} from '../src/components/createMainNavigation.js';
-import {createSort} from '../src/components/createSort.js';
-import {createSectionFilms} from '../src/components/createSectionFilms.js';
-import {createFilmsListContainer} from '../src/components/createFilmsListContainer.js';
-import {createFilmsListExtraSection} from '../src/components/createFilmsListExtraSection.js';
-import {createfilmsMockArray} from '../src/mocks/filmCard.js';
-import {createFilmMarkup} from '../src/components/createFilmCard.js';
-import {createBtnLoadMore} from '../src/components/createBtnLoadMore.js';
-import {createHeaderTopRated} from '../src/components/createHeaderTopRated.js';
-import {createHeaderMostCommented} from '../src/components/createHeaderMostCommented.js';
-import {createFooterStatistics} from '../src/components/createFooterStatistics.js';
+import {createHeaderProfile} from '../src/components/create-header-profile.js';
+import {createMainNavigation} from '../src/components/create-main-navigation.js';
+import {createSort} from '../src/components/create-sort.js';
+import {createSectionFilms} from '../src/components/create-section-films.js';
+import {createFilmsListContainer} from '../src/components/create-films-list-container.js';
+import {createFilmsListExtraSection} from '../src/components/create-films-list-extra-section.js';
+import {createfilmsMockArray} from '../src/mocks/film-card.js';
+import {createMainNavigationMockArray} from '../src/mocks/navigation.js';
+import {createFilmMarkup} from '../src/components/create-film-card.js';
+import {createBtnLoadMore} from '../src/components/create-btn-load-more.js';
+import {createHeaderTopRated} from '../src/components/create-header-top-rated.js';
+import {createHeaderMostCommented} from '../src/components/create-header-most-commented.js';
+import {createFooterStatistics} from '../src/components/create-footer-statistics.js';
 
 
 const render = (container, template, place) => {
@@ -27,7 +28,8 @@ const siteHeaderElement = document.querySelector(`.header`);
 render(siteHeaderElement, createHeaderProfile(), `beforeend`);
 
 const siteMainElement = document.querySelector(`.main`);
-render(siteMainElement, createMainNavigation(), `beforeend`);
+let mainNavigationMockArray = createMainNavigationMockArray(5);
+render(siteMainElement, createMainNavigation(mainNavigationMockArray), `beforeend`);
 render(siteMainElement, createSort(), `beforeend`);
 render(siteMainElement, createSectionFilms(), `beforeend`);
 

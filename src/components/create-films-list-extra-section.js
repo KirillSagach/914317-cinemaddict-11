@@ -1,9 +1,26 @@
-const createFilmsListExtraSection = () => {
-  return (`
-      <section class="films-list--extra">
+import {createElement} from '../util.js';
 
+export default class FilmsListExtraSection {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return (`
+     <section class="films-list--extra">
       </section>
-`);
-};
+  `);
+  }
 
-export {createFilmsListExtraSection};
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate().trim());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

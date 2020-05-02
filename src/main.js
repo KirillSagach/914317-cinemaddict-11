@@ -11,8 +11,7 @@ import {createfilmsMockArray} from '../src/mocks/film-card.js';
 import {createMainNavigationMockArray} from '../src/mocks/navigation.js';
 import FilmMarkup from '../src/components/create-film-card.js';
 import BtnLoadMore from '../src/components/create-btn-load-more.js';
-import HeaderTopRated from '../src/components/create-header-top-rated.js';
-import HeaderMostCommented from '../src/components/create-header-most-commented.js';
+import HeaderMost from '../src/components/create-header-most.js';
 import FooterStatistics from '../src/components/create-footer-statistics.js';
 import {renderElement, RenderPosition} from '../src/util.js';
 
@@ -61,7 +60,8 @@ showMore.addEventListener(`click`, () =>{
 renderElement(siteFilmsSection, new FilmsListExtraSection().getElement(), RenderPosition.BEFOREEND);
 
 const siteFilmsListExtraTopRated = siteFilmsSection.querySelector(`.films-list--extra`);
-const headerTopRated = new HeaderTopRated();
+
+const headerTopRated = new HeaderMost(`Top rated`);
 renderElement(siteFilmsListExtraTopRated, headerTopRated.getElement(), RenderPosition.BEFOREEND);
 renderElement(siteFilmsListExtraTopRated, new FilmsListContainer().getElement(), RenderPosition.BEFOREEND);
 
@@ -71,7 +71,8 @@ createFilmCard(sitefilmsListExtraTopRatedContainer, 0, 2, filmsMockArray.slice()
 renderElement(siteFilmsSection, new FilmsListExtraSection().getElement(), RenderPosition.BEFOREEND);
 const siteFilmsListExtraMostCom = siteFilmsSection.querySelectorAll(`.films-list--extra`);
 let LastInd = siteFilmsListExtraMostCom.length - 1;
-const headerMostCommented = new HeaderMostCommented();
+
+const headerMostCommented = new HeaderMost(`Most commented`);
 renderElement(siteFilmsListExtraMostCom[LastInd], headerMostCommented.getElement(), RenderPosition.BEFOREEND);
 renderElement(siteFilmsListExtraMostCom[LastInd], new FilmsListContainer().getElement(), RenderPosition.BEFOREEND);
 

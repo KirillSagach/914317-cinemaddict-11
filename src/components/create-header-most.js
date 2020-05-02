@@ -1,16 +1,13 @@
 import {createElement} from '../util.js';
 
-const createHeaderMostCommentedMarkup = (header) => {
-  return (`<h2 class="films-list__title">${header}</h2>`);
-};
-
 export default class HeaderMostCommented {
-  constructor() {
+  constructor(header) {
     this._element = null;
+    this._header = header;
   }
 
   getTemplate() {
-    return createHeaderMostCommentedMarkup(`Most commented`);
+    return `<h2 class="films-list__title">${this._header}</h2>`;
   }
 
   getElement() {

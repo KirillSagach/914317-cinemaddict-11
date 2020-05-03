@@ -1,14 +1,13 @@
 import {createElement} from '../util.js';
 
-export default class FooterStatistics {
-  constructor() {
+export default class HeaderMostCommented {
+  constructor(header) {
     this._element = null;
+    this._header = header;
   }
 
   getTemplate() {
-    return (`
-    <p>130 291 movies inside</p>
-    `);
+    return `<h2 class="films-list__title">${this._header}</h2>`;
   }
 
   getElement() {

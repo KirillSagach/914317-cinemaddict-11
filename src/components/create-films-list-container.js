@@ -1,9 +1,27 @@
-const createFilmsListContainer = () => {
-  return (`
-      <div class="films-list__container">
+import {createElement} from '../util.js';
 
+export default class FilmsListContainer {
+  constructor() {
+    this._element = null;
+  }
+
+  getTemplate() {
+    return (`
+     <div class="films-list__container">
       </div>
-`);
-};
+  `);
+  }
 
-export {createFilmsListContainer};
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate().trim());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
+

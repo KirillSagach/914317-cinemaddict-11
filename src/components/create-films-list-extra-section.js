@@ -1,26 +1,11 @@
-import {createElement} from '../util.js';
+import AbstractComponent from './abstract-component.js';
 
-export default class FilmsListExtraSection {
-  constructor() {
-    this._element = null;
-  }
+export default class FilmsListExtraSection extends AbstractComponent {
 
   getTemplate() {
     return (`
      <section class="films-list--extra">
       </section>
   `);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate().trim());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

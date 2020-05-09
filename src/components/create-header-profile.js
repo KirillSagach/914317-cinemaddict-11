@@ -1,8 +1,8 @@
-import {createElement} from '../util.js';
+import AbstractComponent from './abstract-component.js';
 
-export default class HeaderProfile {
+export default class HeaderProfile extends AbstractComponent {
   constructor() {
-    this._element = null;
+    super();
     this._profileData = {
       profileRating: `Movie Buff`,
       profileAvatar: `images/bitmap@2x.png`,
@@ -16,17 +16,5 @@ export default class HeaderProfile {
       <img class="profile__avatar" src="${this._profileData.profileAvatar}" alt="Avatar" width="35" height="35">
     </section>
   `);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate().trim());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

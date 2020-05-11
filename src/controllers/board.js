@@ -1,6 +1,3 @@
-let FILM_COUNT = 5;
-let PREV_FILM_COUNT = 0;
-
 import FilmsListContainer from '../components/create-films-list-container.js';
 import FilmsListExtraSection from '../components/create-films-list-extra-section.js';
 import BtnLoadMore from '../components/create-btn-load-more.js';
@@ -8,12 +5,6 @@ import HeaderMost from '../components/create-header-most.js';
 import FilmMarkup from '../components/create-film-card.js';
 import {renderElement, RenderPosition} from '../util.js';
 
-const createFilmCard = (container, itemStart, itemEnd, filmsArray) => {
-  for (let i = itemStart; i < itemEnd; i++) {
-    const filmMarkup = new FilmMarkup(filmsArray[i]);
-    renderElement(container, filmMarkup, RenderPosition.BEFOREEND);
-  }
-};
 export default class PageController {
 
   constructor(container) {
@@ -26,6 +17,15 @@ export default class PageController {
     this._NewSectionMostCommented = new FilmsListExtraSection();
     this._HeaderTopRated = new HeaderMost(`Top rated`);
     this._HeaderMostCommented = new HeaderMost(`Most commented`);
+    this._FILM_COUNT = 5;
+    this._PREV_FILM_COUNT = 0;
+  }
+
+  createFilmCard(container, itemStart, itemEnd, filmsArray) {
+    for (let i = itemStart; i < itemEnd; i++) {
+      const filmMarkup = new FilmMarkup(filmsArray[i]);
+      renderElement(container, filmMarkup, RenderPosition.BEFOREEND);
+    }
   }
 
   render(filmsMockArray) {
@@ -35,16 +35,21 @@ export default class PageController {
     renderElement(sitefilmsListSection, filmsListContainer, RenderPosition.BEFOREEND);
 
     const siteFilmsListContainer = sitefilmsListSection.querySelector(`.films-list__container`);
-    createFilmCard(siteFilmsListContainer, PREV_FILM_COUNT, FILM_COUNT, filmsMockArray);
+    this.createFilmCard(siteFilmsListContainer, this._PREV_FILM_COUNT, this._FILM_COUNT, filmsMockArray);
 
     const btnLoadMore = this._NewBtnLoadMore;
     renderElement(sitefilmsListSection, btnLoadMore, RenderPosition.BEFOREEND);
     btnLoadMore.setClickHandler(() => {
-      PREV_FILM_COUNT = FILM_COUNT;
-      FILM_COUNT = FILM_COUNT + 5;
-      createFilmCard(siteFilmsListContainer, PREV_FILM_COUNT, FILM_COUNT, filmsMockArray);
+      this._PREV_FILM_COUNT = this._FILM_COUNT;
+      this._FILM_COUNT = this._FILM_COUNT + 5;
+      this.createFilmCard(siteFilmsListContainer, this._PREV_FILM_COUNT, this._FILM_COUNT, filmsMockArray);
     });
 
+    this.renderToprated(filmsMockArray);
+    this.renderMostCommented(filmsMockArray);
+  }
+
+  renderToprated(filmsMockArray) {
     renderElement(this._container.getElement(), this._NewSectionTopRated, RenderPosition.BEFOREEND);
 
     const siteFilmsListExtraTopRated = this._container.getElement().querySelector(`.films-list--extra`);
@@ -54,8 +59,10 @@ export default class PageController {
     renderElement(siteFilmsListExtraTopRated, this._NewfilmsListTopRatedContainer, RenderPosition.BEFOREEND);
 
     const sitefilmsListExtraTopRatedContainer = siteFilmsListExtraTopRated.querySelector(`.films-list__container`);
-    createFilmCard(sitefilmsListExtraTopRatedContainer, 0, 2, filmsMockArray.slice().sort((a, b) => a.rating < b.rating));
+    this.createFilmCard(sitefilmsListExtraTopRatedContainer, 0, 2, filmsMockArray.slice().sort((a, b) => a.rating < b.rating));
+  }
 
+  renderMostCommented(filmsMockArray) {
     renderElement(this._container.getElement(), this._NewSectionMostCommented, RenderPosition.BEFOREEND);
     const siteFilmsListExtraMostCom = this._container.getElement().querySelectorAll(`.films-list--extra`);
     let LastInd = siteFilmsListExtraMostCom.length - 1;
@@ -65,7 +72,8 @@ export default class PageController {
     renderElement(siteFilmsListExtraMostCom[LastInd], this._NewfilmsListMostCommentedContainer, RenderPosition.BEFOREEND);
 
     const sitefilmsListExtraMostComContainer = siteFilmsListExtraMostCom[LastInd].querySelector(`.films-list__container`);
-    createFilmCard(sitefilmsListExtraMostComContainer, 0, 2, filmsMockArray.slice().sort((a, b) => a.comments < b.comments));
+    this.createFilmCard(sitefilmsListExtraMostComContainer, 0, 2, filmsMockArray.slice().sort((a, b) => a.comments < b.comments));
 
   }
+
 }

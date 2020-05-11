@@ -1,6 +1,6 @@
 import AbstractComponent from './abstract-component.js';
 
-const createFilmMarkup = ({ title, rating, year, duration, genre, srcPic, description, comments, activeWatchlist, activeWatched, activeFavourite }) => {
+const createFilmMarkup = ({title, rating, year, duration, genre, srcPic, description, comments, activeWatchlist, activeWatched, activeFavourite}) => {
   const itemActive = `film-card__controls-item--active`;
   const activeWatchlistMarkup = activeWatchlist ? itemActive : ``;
   const activeWatchedMarkup = activeWatched ? itemActive : ``;

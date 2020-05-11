@@ -1,14 +1,11 @@
-import {createElement} from '../util.js';
+import AbstractComponent from './abstract-component.js';
 
 const createSortMarkup = ({sortBtn, isActive, textContent}) => {
   let activeCLass = isActive ? `sort__button--active` : ``;
   return `<li><a href="#" class="${sortBtn} ${activeCLass}">${textContent}</a></li>`;
 };
 
-export default class HeaderSort {
-  constructor() {
-    this._element = null;
-  }
+export default class HeaderSort extends AbstractComponent {
 
   getTemplate() {
     const sortMarkup = [
@@ -34,17 +31,5 @@ export default class HeaderSort {
       ${sortMarkup}
     </ul>
   `);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate().trim());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

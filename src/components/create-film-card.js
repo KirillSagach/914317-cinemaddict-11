@@ -1,4 +1,4 @@
-import {createElement} from '../util.js';
+import AbstractComponent from './abstract-component.js';
 
 const createFilmMarkup = ({title, rating, year, duration, genre, srcPic, description, comments, activeWatchlist, activeWatched, activeFavourite}) => {
   const itemActive = `film-card__controls-item--active`;
@@ -26,25 +26,13 @@ const createFilmMarkup = ({title, rating, year, duration, genre, srcPic, descrip
      </article>`);
 };
 
-export default class FilmMarkup {
+export default class FilmMarkup extends AbstractComponent {
   constructor(it) {
-    this._element = null;
+    super();
     this._it = it;
   }
 
   getTemplate() {
     return createFilmMarkup(this._it);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate().trim());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

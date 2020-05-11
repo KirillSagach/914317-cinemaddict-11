@@ -1,9 +1,6 @@
-import {createElement} from '../util.js';
+import AbstractComponent from './abstract-component.js';
 
-export default class SectionFilms {
-  constructor() {
-    this._element = null;
-  }
+export default class SectionFilms extends AbstractComponent {
 
   getTemplate() {
     return (`
@@ -13,18 +10,6 @@ export default class SectionFilms {
       </section>
     </section>
   `);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate().trim());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
 

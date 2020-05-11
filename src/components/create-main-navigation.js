@@ -1,8 +1,8 @@
-import {createElement} from '../util.js';
+import AbstractComponent from './abstract-component.js';
 
-export default class MainNavigation {
+export default class MainNavigation extends AbstractComponent {
   constructor(mainNavigationMockArray) {
-    this._element = null;
+    super();
     this._mainNavigationMockArray = mainNavigationMockArray;
   }
 
@@ -21,17 +21,5 @@ export default class MainNavigation {
       <a href="#stats" class="main-navigation__additional">Stats</a>
      </nav>
   `);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate().trim());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

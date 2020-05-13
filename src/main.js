@@ -26,7 +26,7 @@ renderElement(siteMainElement, headerSort, RenderPosition.BEFOREEND);
 const sectionFilms = new SectionFilms();
 renderElement(siteMainElement, sectionFilms, RenderPosition.BEFOREEND);
 
-const pageController = new PageController(sectionFilms);
+const pageController = new PageController(sectionFilms, headerSort);
 pageController.render(filmsMockArray);
 
 const siteFooter = document.querySelector(`.footer`);

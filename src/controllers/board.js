@@ -4,10 +4,29 @@ import BtnLoadMore from '../components/create-btn-load-more.js';
 import HeaderMost from '../components/create-header-most.js';
 import FilmMarkup from '../components/create-film-card.js';
 import {renderElement, RenderPosition} from '../util.js';
+import {SortType} from '../components/create-sort.js';
+
+const getSortedFilms = (filmsArray, sortType, itemStart, itemEnd) => {
+  let sortedFilms = [];
+  const currentFilms = filmsArray.slice();
+
+  switch (sortType) {
+    case SortType.RATING:
+      sortedFilms = currentFilms.sort((a, b) => a.rating < b.rating);
+      break;
+    case SortType.DATE:
+      sortedFilms = currentFilms.sort((a, b) => a.year < b.year);
+      break;
+    case SortType.DEFAULT:
+      sortedFilms = currentFilms;
+      break;
+  }
+  return sortedFilms.slice(itemStart, itemEnd);
+};
 
 export default class PageController {
 
-  constructor(container) {
+  constructor(container, sortComponent) {
     this._container = container;
     this._NewfilmsListContainer = new FilmsListContainer();
     this._NewfilmsListTopRatedContainer = new FilmsListContainer();
@@ -19,6 +38,7 @@ export default class PageController {
     this._HeaderMostCommented = new HeaderMost(`Most commented`);
     this._FILM_COUNT = 5;
     this._PREV_FILM_COUNT = 0;
+    this._sortComponent = sortComponent;
   }
 
   createFilmCard(container, itemStart, itemEnd, filmsArray) {
@@ -47,6 +67,11 @@ export default class PageController {
 
     this.renderToprated(filmsMockArray);
     this.renderMostCommented(filmsMockArray);
+    this._sortComponent.setSortTypeChangeHandler((sortType)=>{
+      const sortedFilms = getSortedFilms(filmsMockArray, sortType, 0, this._FILM_COUNT);
+      siteFilmsListContainer.innerHTML = ``;
+      this.createFilmCard(siteFilmsListContainer, 0, this._FILM_COUNT, sortedFilms);
+    });
   }
 
   renderToprated(filmsMockArray) {

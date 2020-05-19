@@ -1,15 +1,7 @@
 import AbstractSmartComponent from "./abstract-component.js";
 
-export default class PopUp extends AbstractSmartComponent {
-  constructor() {
-    super();
-    this._AddToWatchListHandler = null;
-    this._AddToFavouritesHandler = null;
-    this._AlreadyWatchedHandler = null;
-  }
-
-  getTemplate() {
-    return `
+const createPopUp = ({srcPic}) => {
+  return (`
     <section class="film-details">
   <form class="film-details__inner" action="" method="get">
     <div class="form-details__top-container">
@@ -18,7 +10,7 @@ export default class PopUp extends AbstractSmartComponent {
       </div>
       <div class="film-details__info-wrap">
         <div class="film-details__poster">
-          <img class="film-details__poster-img" src="./images/posters/the-great-flamarion.jpg" alt="">
+          <img class="film-details__poster-img" src="${srcPic}" alt="">
 
           <p class="film-details__age">18+</p>
         </div>
@@ -128,7 +120,20 @@ export default class PopUp extends AbstractSmartComponent {
     </div>
   </form>
 </section>
-`;
+`);
+};
+
+export default class PopUp extends AbstractSmartComponent {
+  constructor(popUpData) {
+    super();
+    this._AddToWatchListHandler = null;
+    this._AddToFavouritesHandler = null;
+    this._AlreadyWatchedHandler = null;
+    this._popUpData = popUpData;
+  }
+
+  getTemplate() {
+    return createPopUp(this._popUpData);
   }
 
   recoverListeners() {

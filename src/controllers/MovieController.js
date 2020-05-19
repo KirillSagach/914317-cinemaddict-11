@@ -7,7 +7,8 @@ export default class MovieController {
     this._container = container;
     this._onDataChange = onDataChange;
     this._onViewChange = onViewChange;
-    this._oldFilmMarkup = null;
+    this._oldFilmComponent = null;
+    this._oldPopUp = null;
   }
 
   setDefaultView() {
@@ -16,8 +17,10 @@ export default class MovieController {
   }
 
   render(filmData) {
-    this._oldFilmMarkup = this._filmMarkup;
+    this._oldFilmComponent = this._filmMarkup;
+    this._oldPopUp = this._NewPopUp;
     this._filmMarkup = new FilmMarkup(filmData);
+    this._NewPopUp = new PopUp(filmData);
 
     this._filmMarkup.setAddToFavourites((evt) => {
       evt.preventDefault();
@@ -34,25 +37,18 @@ export default class MovieController {
       this._onDataChange(this, filmData, Object.assign({}, filmData, {activeWatched: !filmData.activeWatched}));
     });
 
-    if (this._oldFilmMarkup) {
-      replace(this._filmMarkup, this._oldFilmMarkup);
+    if (this._oldFilmComponent && this._oldPopUp) {
+      replace(this._filmMarkup, this._oldFilmComponent);
+      replace(this._NewPopUp, this._oldPopUp);
     } else {
       renderElement(this._container, this._filmMarkup, RenderPosition.BEFOREEND);
 
-      this._oldPopUp = null;
-      this._oldPopUp = this._NewPopUp;
-      this._NewPopUp = new PopUp();
-
-      if (this._oldPopUp) {
-        replace(this._NewPopUp, this._oldPopUp);
-      } else {
-        this._filmMarkup.getPopUp(() => {
-          const bodyArea = document.querySelector(`body`);
-          renderElement(bodyArea, this._NewPopUp, RenderPosition.BEFOREEND);
-          this._NewPopUp.setClosePopUpHandler();
-          this._NewPopUp.setEmojiToComment();
-        });
-      }
+      this._filmMarkup.getPopUp(() => {
+        const bodyArea = document.querySelector(`body`);
+        renderElement(bodyArea, this._NewPopUp, RenderPosition.BEFOREEND);
+        this._NewPopUp.setClosePopUpHandler();
+        this._NewPopUp.setEmojiToComment();
+      });
     }
   }
 }

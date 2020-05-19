@@ -35,4 +35,25 @@ export default class FilmMarkup extends AbstractComponent {
   getTemplate() {
     return createFilmMarkup(this._it);
   }
+
+  getPopUp(btnAct) {
+    this.getElement().querySelector(`.film-card__title`).addEventListener(`click`, btnAct);
+  }
+
+  closePopUp(btnAct) {
+    this.getElement().querySelector(`.film-details__close-btn`).addEventListener(`click`, btnAct);
+  }
+
+  setAddToWatchList(handler) {
+    this.getElement().querySelector(`.film-card__controls-item--add-to-watchlist`).addEventListener(`click`, handler);
+  }
+
+  setAddToFavourites(handler) {
+    this.getElement().querySelector(`.film-card__controls-item--favorite`).addEventListener(`click`, handler);
+  }
+
+  setAlreadyWatched(handler) {
+    this.getElement().querySelector(`.film-card__controls-item--mark-as-watched`).addEventListener(`click`, handler);
+  }
+
 }

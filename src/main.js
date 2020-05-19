@@ -1,4 +1,3 @@
-
 import HeaderProfile from '../src/components/create-header-profile.js';
 import MainNavigation from '../src/components/create-main-navigation.js';
 import HeaderSort from '../src/components/create-sort.js';
